@@ -58,23 +58,6 @@ body {
     color: #fff;
 }
 
-.input-group.remember-me {
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-}
-
-.input-group.remember-me label {
-    margin-left: 0.5rem;
-    color: #fff;
-    font-size: 14px;
-}
-
-.input-group.remember-me input {
-    margin-right: 0.5rem;
-    transform: scale(1.2);
-}
-
 .button-group {
     display: flex;
     justify-content: space-between;
