@@ -15,6 +15,9 @@ const Navbar: React.FC = () => {
             <Link to="/home" className="navbar-logo">
                 <h2 className="navbar-brand">Blog App</h2>
             </Link>
+            <div className="navbar-search">
+                <input type="text" placeholder="Search..." className="search-input" />
+            </div>
             <div className="navbar-links">
                 <Link to="/home" className="navbar-link">
                     Home

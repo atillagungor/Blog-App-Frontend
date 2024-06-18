@@ -25,6 +25,26 @@
     color: #fff;
 }
 
+.navbar-search {
+    flex: 1;
+    /* To expand and occupy the remaining space */
+    margin: 0 20px;
+    /* Adjust margin as needed */
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
 .navbar-links {
     display: flex;
     gap: 10px;
@@ -42,6 +62,6 @@
 }
 
 .navbar-link:hover {
-    background-color: #181818;
+    background-color: #555;
     color: #fd7e14;
 }
