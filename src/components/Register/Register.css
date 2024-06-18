@@ -61,7 +61,20 @@ body {
     color: #999;
 }
 
-.button-group2 {
+.password-input {
+    position: relative;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+    color: #777;
+}
+
+.button-group {
     margin-top: 1rem;
 }
 

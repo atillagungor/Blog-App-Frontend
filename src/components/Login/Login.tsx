@@ -6,11 +6,14 @@ import './Login.css';
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 import axios, { AxiosError } from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,6 +22,7 @@ const Login: React.FC = () => {
 
     try {
       const token = await AuthService.login(loginRequest);
+      navigate('/home');
       toastr.success('Login successful!', 'Success');
     } catch (err: any) {
       if (axios.isAxiosError(err)) {
@@ -38,6 +42,10 @@ const Login: React.FC = () => {
     navigate('/register');
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
@@ -55,14 +63,19 @@ const Login: React.FC = () => {
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
+          <div className="password-input">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+            <span className="eye-icon" onClick={togglePasswordVisibility}>
+              <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+            </span>
+          </div>
         </div>
         <div className="input-group remember-me">
           <input

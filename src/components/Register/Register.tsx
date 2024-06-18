@@ -5,6 +5,8 @@ import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 import axios, { AxiosError } from 'axios';
 import './Register.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
@@ -14,6 +16,8 @@ const Register: React.FC = () => {
     const [userName, setUserName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -98,28 +102,42 @@ const Register: React.FC = () => {
                 </div>
                 <div className="input-group">
                     <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Enter your password"
-                        required
-                    />
+                    <div className="password-input">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            required
+                        />
+                        <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                            className="password-toggle-icon"
+                            onClick={() => setShowPassword(!showPassword)}
+                        />
+                    </div>
                 </div>
                 <div className="input-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="Confirm your password"
-                        required
-                    />
+                    <div className="password-input">
+                        <input
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="Confirm your password"
+                            required
+                        />
+                        <FontAwesomeIcon
+                            icon={showConfirmPassword ? faEyeSlash : faEye}
+                            className="password-toggle-icon"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        />
+                    </div>
                 </div>
                 <div className="button-group">
-                    <button type="submit" className="register-button">Register</button>
+                    <button type="submit" className="register-button2">Register</button>
                 </div>
             </form>
         </div>
