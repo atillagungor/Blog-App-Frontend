@@ -1,16 +1,41 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthService from '../../Services/AuthService';
+import { LoginRequestModel } from '../../Models/Requests/Auth/LoginRequestModel';
 import './Login.css';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+import axios, { AxiosError } from 'axios';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember Me:', rememberMe);
+    const loginRequest: LoginRequestModel = { email, password };
+
+    try {
+      const token = await AuthService.login(loginRequest);
+      toastr.success('Login successful!', 'Success');
+    } catch (err: any) {
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError;
+        if (axiosError.response) {
+          toastr.error('Login failed. Please check your credentials and try again.', 'Error');
+        } else {
+          toastr.warning('Backend server is not reachable. Please try again later.', 'Warning');
+        }
+      } else {
+        toastr.error('An unexpected error occurred. Please try again.', 'Error');
+      }
+    }
+  };
+
+  const handleRegisterRedirect = () => {
+    navigate('/register');
   };
 
   return (
@@ -50,7 +75,9 @@ const Login: React.FC = () => {
         </div>
         <div className="button-group">
           <button type="submit" className="login-button">Login</button>
-          <button type="button" className="register-button">Register</button>
+          <button type="button" className="register-button" onClick={handleRegisterRedirect}>
+            Register
+          </button>
         </div>
         <a href="#" className="forgot-password">Forgot Password</a>
       </form>
