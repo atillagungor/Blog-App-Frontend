@@ -22,6 +22,15 @@ class AuthService {
       throw (error as AxiosError).response?.data || error;
     }
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
 }
 
 export default new AuthService();
