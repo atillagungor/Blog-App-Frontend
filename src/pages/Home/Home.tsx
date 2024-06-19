@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [likedPosts, setLikedPosts] = useState<string[]>([]); // Beğenilen postların listesi
+  const [likedPosts, setLikedPosts] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -40,10 +40,8 @@ const Home: React.FC = () => {
 
   const handleLike = (postId: string) => {
     if (likedPosts.includes(postId)) {
-      // Eğer zaten beğenilmişse, beğeniden kaldır
       setLikedPosts(likedPosts.filter(id => id !== postId));
     } else {
-      // Eğer beğenilmemişse, beğen
       setLikedPosts([...likedPosts, postId]);
     }
   };

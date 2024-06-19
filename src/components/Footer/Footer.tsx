@@ -9,8 +9,6 @@ const Footer: React.FC = () => {
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
-
-            // Footer'ın görünmesi gereken eşik değerini belirleyin (örneğin, son 20 pikselde göster)
             const threshold = documentHeight - windowHeight - 20;
 
             if (scrollTop > threshold) {
@@ -31,7 +29,6 @@ const Footer: React.FC = () => {
             <div className="footer-content">
                 <p>&copy; 2024 Blog App. All rights reserved.</p>
                 <div className="social-icons">
-                    {/* Sosyal ikonlar buraya eklenebilir */}
                 </div>
             </div>
         </footer>

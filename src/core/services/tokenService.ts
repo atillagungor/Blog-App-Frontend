@@ -11,7 +11,7 @@ class TokenService {
 	}
 	setToken(token: string) {
 		localStorage.setItem("token", token);
-	  }
+	}
 }
 
 export default new TokenService();

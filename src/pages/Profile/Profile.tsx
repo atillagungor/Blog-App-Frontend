@@ -1,19 +1,17 @@
-// Profile.tsx
-
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import UserService from '../../Services/UserService';
-import { UserGetResponseModel } from '../../Models/Responses/User/UserGetResponseModel'; // UserGetResponseModel arayüzü import ediliyor
+import { UserGetResponseModel } from '../../Models/Responses/User/UserGetResponseModel';
 
 const Profile: React.FC = () => {
-    const [user, setUser] = useState<UserGetResponseModel | null>(null); // UserGetResponseModel'e göre state tanımlaması güncellendi
+    const [user, setUser] = useState<UserGetResponseModel | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const loggedInUserEmail = 'string@mail.com'; // Örneğin burada dinamik olarak bir e-posta adresi gönderebilirsiniz.
+                const loggedInUserEmail = 'string@mail.com';
                 const response = await UserService.getByMail(loggedInUserEmail);
                 setUser(response.data);
                 setLoading(false);
@@ -52,7 +50,6 @@ const Profile: React.FC = () => {
                 <div>
                     <strong>Email:</strong> {user.email}
                 </div>
-                {/* Diğer kullanıcı bilgilerini buraya ekleyebilirsiniz */}
             </div>
         </div>
     );
