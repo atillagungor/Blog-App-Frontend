@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Spin, Typography } from 'antd';
 import './Home.css';
 import { BASE_API_URL } from '../../environment/environment';
-
-const { Title, Paragraph } = Typography;
+import { AiFillHeart } from 'react-icons/ai'; // Kalp ikonu
 
 interface Post {
   id: string;
@@ -17,6 +15,7 @@ const Home: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [likedPosts, setLikedPosts] = useState<string[]>([]); // Beğenilen postların listesi
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,10 +38,20 @@ const Home: React.FC = () => {
     fetchPosts();
   }, []);
 
+  const handleLike = (postId: string) => {
+    if (likedPosts.includes(postId)) {
+      // Eğer zaten beğenilmişse, beğeniden kaldır
+      setLikedPosts(likedPosts.filter(id => id !== postId));
+    } else {
+      // Eğer beğenilmemişse, beğen
+      setLikedPosts([...likedPosts, postId]);
+    }
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
-        <Spin size="large" />
+        Loading...
       </div>
     );
   }
@@ -50,7 +59,7 @@ const Home: React.FC = () => {
   if (error) {
     return (
       <div className="error-container">
-        <Typography.Text type="danger">{error}</Typography.Text>
+        {error}
       </div>
     );
   }
@@ -58,21 +67,21 @@ const Home: React.FC = () => {
   if (posts.length === 0) {
     return (
       <div className="no-posts-container">
-        <Typography.Text>No posts available</Typography.Text>
+        No posts available
       </div>
     );
   }
 
   return (
     <div className="home">
-      <Title level={2}>Posts</Title>
+      <h2 className="posts-title">Posts</h2>
       <div className="posts">
         {posts.map(post => (
-          <Card key={post.id} title={post.title} className="post">
-            <Paragraph>{post.content}</Paragraph>
-            <Paragraph strong>Created At:</Paragraph>
-            <Paragraph>{new Date(post.createdDate).toLocaleDateString()}</Paragraph>
-          </Card>
+          <div key={post.id} className="post">
+            <h3 className="post-title">{post.title}</h3>
+            <p className="post-content">{post.content}</p>
+            <p className="post-created-at">Created At: {new Date(post.createdDate).toLocaleDateString()}</p>
+          </div>
         ))}
       </div>
     </div>

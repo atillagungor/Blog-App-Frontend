@@ -22,8 +22,11 @@ const Navbar: React.FC = () => {
                 <Link to="/home" className="navbar-link">
                     Home
                 </Link>
+                <Link to="/profile" className="navbar-link">
+                    Profile
+                </Link>
                 <button onClick={handleLogout} className="navbar-link">
-                    Logout
+                    Log Out
                 </button>
             </div>
         </div>

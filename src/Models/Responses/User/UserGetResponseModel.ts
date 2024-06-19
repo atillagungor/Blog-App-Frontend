@@ -3,5 +3,4 @@ export interface UserGetResponseModel {
 	firstName: string;
 	lastName: string;
 	email: string;
-	isInstructor: boolean;
 }

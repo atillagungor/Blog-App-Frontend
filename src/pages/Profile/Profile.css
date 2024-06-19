@@ -1,0 +1,42 @@
+/* Profile.css */
+
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    background-color: #1e1e1e;
+    /* Arka plan rengi */
+}
+
+.profile-header {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.profile-details {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.profile-details div {
+    margin-bottom: 10px;
+}
+
+.loading-container,
+.error-container {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.error-container {
+    color: #ff6347;
+}

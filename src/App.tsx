@@ -5,6 +5,7 @@ import Register from './components/Register/Register';
 import Home from './pages/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import Profile from './pages/Profile/Profile'; // Profile bileşenini ekledik
 
 const App: React.FC = () => {
   return (
@@ -25,8 +26,9 @@ const Main: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} /> {/* Profile sayfasını ekledik */}
       </Routes>
-      {location.pathname === '/home' && <Footer />}
+      {(location.pathname === '/home' || location.pathname === '/profile') && <Footer />} {/* Footer'ı Home ve Profile sayfalarında gösteriyoruz */}
     </div>
   );
 };

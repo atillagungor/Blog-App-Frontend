@@ -57,9 +57,20 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .navbar-link:hover {
     background-color: #555;
     color: #fd7e14;
+}
+
+.loading-container,
+.error-container,
+.no-posts-container {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
 }
