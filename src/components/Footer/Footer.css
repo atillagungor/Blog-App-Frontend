@@ -1,12 +1,20 @@
 .footer {
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: -50px;
+    /* Başlangıçta sayfanın altında gizli olacak */
     width: 100%;
     background-color: #1a1a1a;
     color: #fff;
     text-align: center;
     padding: 10px 0;
+    transition: bottom 0.3s ease;
+    /* Animasyonlu geçiş için */
+}
+
+.footer.show {
+    bottom: 0;
+    /* Gösterildiğinde sayfanın altında sabit konumda */
 }
 
 .footer-content {
@@ -18,7 +26,7 @@
 }
 
 .social-icons {
-    /* Add styles for social icons if needed */
+    /* Sosyal ikonlar için gerekli stil ayarlamaları */
 }
 
 .footer p {

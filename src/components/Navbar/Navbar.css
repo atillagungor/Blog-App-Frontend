@@ -27,9 +27,7 @@
 
 .navbar-search {
     flex: 1;
-    /* To expand and occupy the remaining space */
     margin: 0 20px;
-    /* Adjust margin as needed */
     display: flex;
     align-items: center;
 }
