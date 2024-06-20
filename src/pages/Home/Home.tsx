@@ -4,6 +4,9 @@ import './Home.css';
 import { BASE_API_URL } from '../../environment/environment';
 import Post from '../../components/Post/Post';
 import Navbar from '../../components/Navbar/Navbar';
+import { FiEdit3 } from 'react-icons/fi';
+import Modal from 'react-modal';
+import PostFormModal from '../../components/Post/PostFormModal';
 
 interface PostData {
   id: string;
@@ -12,20 +15,23 @@ interface PostData {
   createdDate: string;
 }
 
+Modal.setAppElement('#root');
+
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [likedPosts, setLikedPosts] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isCreatingPost, setIsCreatingPost] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`${BASE_API_URL}Post/getall?PageIndex=0&PageSize=5`);
+        const response = await axios.get(`${BASE_API_URL}Post/getall?PageIndex=0&PageSize=6`);
         console.log('API response:', response.data);
         if (response.data && response.data.items && response.data.items.length > 0) {
-          setPosts(response.data.items.reverse()); // Yeni eklenen postlar en üstte gözüksün
+          setPosts(response.data.items);
         } else {
           setError('No posts available');
         }
@@ -50,9 +56,14 @@ const Home: React.FC = () => {
 
   const filterPosts = (query: string) => {
     setSearchTerm(query);
-    // Burada isterseniz backend'e tekrar istek atarak filtreleme işlemini yapabilirsiniz.
-    // Örneğin, axios ile backend'e yeni bir istek atabilir ve filtrelenmiş sonuçları alabilirsiniz.
-    // Backend'den gelen sonuçları setPosts ile güncelleyebilirsiniz.
+  };
+
+  const openModal = () => {
+    setIsCreatingPost(true);
+  };
+
+  const closeModal = () => {
+    setIsCreatingPost(false);
   };
 
   const filteredPosts = posts.filter(post =>
@@ -100,6 +111,17 @@ const Home: React.FC = () => {
           />
         ))}
       </div>
+      <button className="add-post-button" onClick={openModal}>
+        <FiEdit3 className="edit-icon" />
+      </button>
+      <Modal
+        isOpen={isCreatingPost}
+        onRequestClose={closeModal}
+        className="post-form-modal"
+        overlayClassName="modal-overlay"
+      >
+        <PostFormModal onClose={closeModal} />
+      </Modal>
     </div>
   );
 };

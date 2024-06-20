@@ -1,4 +1,4 @@
-import { PageRequestModel } from './../Models/Requests/PageRequestModel';
+import { PageRequestModel } from '../Models/Requests/PageRequestModel';
 import { AxiosResponse } from "axios";
 import { Paginate } from "../core/Models/Paginate";
 import axiosInstance from "../core/interceptors/axiosInterceptor";
