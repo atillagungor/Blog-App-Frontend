@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+    filterPosts: (query: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ filterPosts }) => {
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const query = event.target.value;
+        setSearchQuery(query); // Input değerini state'e güncelliyoruz
+        filterPosts(query); // Üst komponente (Home) query'i iletiyoruz
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -16,7 +27,13 @@ const Navbar: React.FC = () => {
                 <h2 className="navbar-brand">Blog App</h2>
             </Link>
             <div className="navbar-search">
-                <input type="text" placeholder="Search..." className="search-input" />
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    className="search-input"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                />
             </div>
             <div className="navbar-links">
                 <Link to="/home" className="navbar-link">
